@@ -64,3 +64,19 @@ var hen = {
 };
 hen.name = "Aashish";
 console.log(hen);
+var gym = {
+    name: "ritik",
+    rollNo: 6789,
+    isAlive: true,
+};
+console.log(gym);
+// Union in TypeScript
+var ghar = 123;
+ghar = "ritik";
+var person = { userId: 123, email: "ritk@gmail.com" };
+console.log(person);
+person = {
+    userName: "ritik123",
+    email: "ritk@gmail.com",
+};
+console.log(person);
