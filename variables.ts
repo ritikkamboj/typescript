@@ -222,10 +222,19 @@ interface pk {
   getCoupon(coupanName: string): number;
 }
 
-let user98: pk = {
+interface pk {
+  githubId: string;
+}
+interface Admin extends pk {
+  role: "admin" | "TA" | "learner";
+}
+
+let user97: Admin = {
   dbId: 123,
+  role: "admin",
   email: "r@r.com",
   userId: 1234,
+  githubId: "rkd ",
   startTrail: () => {
     return 10;
   },
@@ -235,4 +244,190 @@ let user98: pk = {
   // googleId: "ritk123",
 };
 
+let user98: pk = {
+  dbId: 123,
+  email: "r@r.com",
+  userId: 1234,
+  githubId: "rkd ",
+  startTrail: () => {
+    return 10;
+  },
+  getCoupon(name: "rik100") {
+    return 10;
+  },
+  // googleId: "ritk123",
+};
+
+// re opening of interface
+// suppose we want to add more type fields in our interface , so instead of editing the previous one, we do like this :
+
+// interface pk {
+//   githubId: string;
+// }
+
+// classes in typescript
+
+class User50 {
+  protected _courseCount = 1;
+  name: string;
+  email: string;
+  private readonly city: string = "ladwa";
+  constructor(name: string, email: string) {
+    this.name = name;
+    this.email = email;
+  }
+  private getMessage() {
+    console.log("jai maata di ");
+  }
+  get getAppleEmail(): string {
+    return `apple ${this.email}`;
+  }
+
+  get courseCount(): number {
+    return this._courseCount;
+  }
+
+  set courseCount(courseNum) {
+    if (courseNum <= 1) throw new Error("count should be more than 1");
+
+    this._courseCount = courseNum;
+  }
+}
+class subUser extends User50 {
+  isFamily: boolean = true;
+
+  changeCount() {
+    this._courseCount = 4;
+  }
+}
+
+// User50.getMessage;
+
+const ritik = new User50("ritik", "r@gmail.com");
+// ritik.getMessage();
+console.log(ritik);
+// ritik.city;
+
+interface TakePhoto {
+  cameraMode: string;
+  filter: string;
+  burst: number;
+}
+
+interface Story {
+  createStory(): void;
+}
+
+class Instagram implements TakePhoto {
+  cameraMode: string;
+  filter: string;
+  burst: number;
+
+  constructor(cameraMode: string, filter: string, burst: number) {
+    this.cameraMode = cameraMode;
+    this.filter = filter;
+    this.burst = burst;
+  }
+}
+
+class Youtube implements TakePhoto, Story {
+  cameraMode: string;
+  filter: string;
+  burst: number;
+  short: string;
+
+  constructor(
+    cameraMode: string,
+    filter: string,
+    burst: number,
+    short: string
+  ) {
+    this.cameraMode = cameraMode;
+    this.filter = filter;
+    this.burst = burst;
+    this.short = short;
+  }
+
+  createStory(): void {
+    console.log("story created ");
+  }
+}
+
+interface TakePhoto1 {
+  cameraMode: string;
+  filter: string;
+  burst: number;
+}
+
+class Instagram1 implements TakePhoto {
+  constructor(
+    public cameraMode: string,
+    public filter: string,
+    public burst: number
+  ) {}
+}
+
+abstract class TakePhoto2 {
+  constructor(public filter: string, public burst: string) {}
+
+  abstract getSepia(): void;
+
+  getReelNumber(): number {
+    return 8;
+  }
+}
+
+class TakePhoto4 extends TakePhoto2 {
+  constructor(
+    public filter: string,
+    public burst: string,
+    public cameraMode: string
+  ) {
+    super(filter, burst);
+  }
+
+  getSepia(): void {
+    console.log("sepia");
+  }
+}
+
+const hitesh = new TakePhoto4("jai", "maata", "di");
+// const hitesh2 = new TakePhoto2()
+
+hitesh.getReelNumber();
+
+function Identity3<Type>(val: Type): Type {
+  return val;
+}
+
+Identity3<string>("ritik");
+
+function Identity4<T>(val: T): T {
+  return val;
+}
+
+interface Bottle {
+  name: string;
+  price: number;
+}
+
+let x1 = Identity4<Bottle>({ name: "pepsi", price: 80 });
+console.log(x1);
+
+function getProducts<T>(products: T[]): T {
+  const num = 3;
+  return products[num];
+}
+
+function getProducts1<T>(products: T[]): T[] {
+  const num = 3;
+  return products;
+}
+
+// adapting the above methods in
+
+const getProducts2 = <T>(products: T[]): T => {
+  const num = 4;
+  return products[num];
+};
 export {};
