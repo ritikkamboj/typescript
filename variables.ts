@@ -430,4 +430,46 @@ const getProducts2 = <T>(products: T[]): T => {
   const num = 4;
   return products[num];
 };
+
+//generic classes
+
+interface DB {
+  connection: string;
+  name: string;
+  password: string;
+}
+
+function anotherfunc<T, U extends DB>(valOne: T, valTwo: U): object {
+  return {};
+}
+
+anotherfunc(3, {
+  connection: "someDB link",
+  name: "ritik",
+  password: "some passowrd ",
+});
+
+//now we can see the exact use of generic classes
+
+interface quiz {
+  name: string;
+  type: string;
+}
+
+interface exam {
+  name: string;
+  marks: number;
+  difficulty: string;
+}
+
+class Sellable<T> {
+  public cart: T[] = [];
+  addtoCart(product: T) {
+    this.cart.push(product);
+  }
+}
+
+const examObj = new Sellable<exam>();
+examObj.addtoCart({ name: "ritik", marks: 45, difficulty: "strong" });
+console.log(examObj.cart);
 export {};

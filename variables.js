@@ -269,3 +269,36 @@ function Identity4(val) {
 }
 var x1 = Identity4({ name: "pepsi", price: 80 });
 console.log(x1);
+function getProducts(products) {
+    var num = 3;
+    return products[num];
+}
+function getProducts1(products) {
+    var num = 3;
+    return products;
+}
+// adapting the above methods in
+var getProducts2 = function (products) {
+    var num = 4;
+    return products[num];
+};
+function anotherfunc(valOne, valTwo) {
+    return {};
+}
+anotherfunc(3, {
+    connection: "someDB link",
+    name: "ritik",
+    password: "some passowrd ",
+});
+var Sellable = /** @class */ (function () {
+    function Sellable() {
+        this.cart = [];
+    }
+    Sellable.prototype.addtoCart = function (product) {
+        this.cart.push(product);
+    };
+    return Sellable;
+}());
+var examObj = new Sellable();
+examObj.addtoCart({ name: "ritik", marks: 45, difficulty: "strong" });
+console.log(examObj.cart);
