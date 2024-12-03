@@ -472,4 +472,80 @@ class Sellable<T> {
 const examObj = new Sellable<exam>();
 examObj.addtoCart({ name: "ritik", marks: 45, difficulty: "strong" });
 console.log(examObj.cart);
+
+function printAll(strs: string | string[]) {
+  if (typeof strs === "object") {
+    for (const s of strs) {
+      console.log(s);
+    }
+  } else if (typeof strs === "string") {
+    console.log(strs);
+  } else {
+    // do nothing
+  }
+}
+
+function logValue(x: Date | string) {
+  if (x instanceof Date) {
+    console.log(x.toUTCString());
+  } else {
+    console.log(x.toUpperCase());
+  }
+}
+
+// type Predicates
+
+type fish = {
+  swim: () => void;
+};
+
+type bird = {
+  fly: () => void;
+};
+
+function isFish(pet: fish | bird): pet is fish {
+  return (pet as fish).swim !== undefined;
+}
+
+function getFood(pet: fish | bird) {
+  if (isFish(pet)) {
+    pet;
+    return "fish food";
+  } else {
+    pet;
+    return "bird food ";
+  }
+}
+
+interface Circle {
+  kind: "circle";
+  radius: number;
+}
+
+interface Square {
+  kind: "square";
+  side: number;
+}
+interface Rectangle {
+  kind: "rectangle";
+  length: number;
+  width: number;
+}
+
+type Shape = Circle | Square | Rectangle;
+
+function getArea2(shape: Shape) {
+  switch (shape.kind) {
+    case "circle":
+      return Math.PI * shape.radius * shape.radius;
+    case "square":
+      return shape.side * shape.side;
+    case "rectangle":
+      return shape.length * shape.width;
+    default:
+      const _defaultforshape: never = shape;
+      return _defaultforshape;
+  }
+}
+
 export {};
